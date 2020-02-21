@@ -1,9 +1,7 @@
 package fr.dut.tp2.andrawid;
 
-class DrawableShape {
-    private final String name;
+import android.graphics.Canvas;
 
-    public DrawableShape(String name) {
-        this.name = name;
-    }
+public interface DrawableShape {
+    public void drawShape(float left, float top, float right, float bottom, Canvas canvas);
 }
