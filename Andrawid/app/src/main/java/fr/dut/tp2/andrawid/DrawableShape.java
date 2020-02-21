@@ -1,4 +1,4 @@
-package fr.dut.tp2.andrawid.export;
+package fr.dut.tp2.andrawid;
 
 class DrawableShape {
     private final String name;
