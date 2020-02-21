@@ -1,4 +1,8 @@
-package fr.dut.tp2.andrawid.export;
+package fr.dut.tp2.andrawid;
+
+import android.graphics.Canvas;
+import fr.dut.tp2.andrawid.DrawableShape;
+import fr.dut.tp2.andrawid.Place;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,6 +13,7 @@ class ShapeContainer {
     public ShapeContainer(Map<DrawableShape, Place> map) {
         this.map = map;
     }
+
     public ShapeContainer() {
         map = new HashMap<>();
     }
@@ -19,5 +24,9 @@ class ShapeContainer {
 
     public void add(DrawableShape shape, Place place){
         map.put(shape,place);
+    }
+
+    public void draw(Canvas canvas){
+
     }
 }
