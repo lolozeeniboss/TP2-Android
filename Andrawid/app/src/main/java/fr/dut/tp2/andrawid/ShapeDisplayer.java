@@ -32,11 +32,15 @@ public class ShapeDisplayer extends View {
     public void setModel (ShapeContainer shapeContainer){
         this.model = shapeContainer;
         this.invalidate();
+        ShapeContainerChangeListener listener = this::invalidate;
+        model.addChangeListener(listener);
     }
 
+    @Override
     public void onDraw (Canvas canvas){
         if(model != null){
             model.draw(canvas);
         }
     }
+
 }

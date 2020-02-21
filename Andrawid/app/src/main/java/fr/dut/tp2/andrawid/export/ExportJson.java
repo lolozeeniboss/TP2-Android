@@ -2,6 +2,7 @@ package fr.dut.tp2.andrawid.export;
 
 import android.util.Log;
 
+import fr.dut.tp2.andrawid.ShapeContainer;
 import org.json.JSONException;
 import org.json.JSONObject;
 

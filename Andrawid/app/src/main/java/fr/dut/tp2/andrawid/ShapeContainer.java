@@ -1,14 +1,14 @@
 package fr.dut.tp2.andrawid;
 
 import android.graphics.Canvas;
-import fr.dut.tp2.andrawid.DrawableShape;
-import fr.dut.tp2.andrawid.Place;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-class ShapeContainer {
+public class ShapeContainer {
     private final Map<DrawableShape, Place> map;
+    private ArrayList<ShapeContainerChangeListener> changeListeners = new ArrayList<>();
 
     public ShapeContainer(Map<DrawableShape, Place> map) {
         this.map = map;
@@ -18,15 +18,36 @@ class ShapeContainer {
         map = new HashMap<>();
     }
 
-    public Map<DrawableShape, Place> getMap(){
+    public Map<DrawableShape, Place> getMap() {
         return map;
     }
 
-    public void add(DrawableShape shape, Place place){
-        map.put(shape,place);
+    public boolean add(DrawableShape shape, Place place) {
+        if (map.containsKey(shape)) {
+            return false;
+        }
+        map.put(shape, place);
+        return true;
     }
 
-    public void draw(Canvas canvas){
+    public void addChangeListener(ShapeContainerChangeListener listener) {
+        this.changeListeners.add(listener);
+    }
 
+    public void removeChangeListener(ShapeContainerChangeListener listener) {
+        changeListeners = null;
+    }
+
+    public void draw(Canvas canvas) {
+        for (Map.Entry<DrawableShape, Place> entry : map.entrySet()) {
+            DrawableShape key = entry.getKey();
+            Place value = entry.getValue();
+            key.drawShape(value.getLeft(), value.getTop(), value.getRight(), value.getBottom(), canvas);
+        }
+    }
+
+    public void fireListeners() {
+        for (ShapeContainerChangeListener listener : changeListeners)
+            listener.onShapeContainerChange();
     }
 }
