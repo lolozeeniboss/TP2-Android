@@ -11,6 +11,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Map;
@@ -28,7 +29,7 @@ public class ExportJson implements DrawingIO {
             JSONArray arrayJson = new JSONArray();
             for (Map.Entry<DrawableShape, Place> entry : container.getMap().entrySet()){
                 JSONObject j = new JSONObject();
-                j.put("type",entry.getKey().getType());
+                j.put("shapeKind",entry.getKey().getType());
                 JSONArray array2 = new JSONArray();
                 array2.put(entry.getValue().getLeft());
                 array2.put(entry.getValue().getTop());
@@ -41,7 +42,11 @@ public class ExportJson implements DrawingIO {
     } catch (JSONException e) {
             e.printStackTrace();
         }
-
+        try {
+            output.write(object.toString().getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         System.out.println(object);
         Log.println(Log.DEBUG,"",object.toString());
