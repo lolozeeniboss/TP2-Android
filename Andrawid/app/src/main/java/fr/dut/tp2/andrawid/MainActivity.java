@@ -43,8 +43,12 @@ public class MainActivity extends AppCompatActivity {
             }
             return false;
         });
-        test.export();
+
     }
 
+
+    public void onSaveButtonClicked(View v) {
+        test.export();
+    }
 
 }

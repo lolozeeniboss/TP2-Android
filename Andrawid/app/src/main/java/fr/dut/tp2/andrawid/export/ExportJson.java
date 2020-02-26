@@ -18,7 +18,7 @@ public class ExportJson implements DrawingIO {
         try {
             object.put("type","drawing");
             object.put("formatVersion","1.0");
-            object.put("modificationDate","20180317T141510Z");
+            object.put("modificationDate",System.currentTimeMillis());
         } catch (JSONException e) {
             e.printStackTrace();
         }
