@@ -23,10 +23,8 @@ public class ShapeContainer {
     }
 
     public boolean add(DrawableShape shape, Place place) {
-        if (map.containsKey(shape)) {
-            return false;
-        }
         map.put(shape, place);
+        fireListeners();
         return true;
     }
 

@@ -27,10 +27,12 @@ public class MainActivity extends AppCompatActivity {
         view.setOnTouchListener((v, event) -> {
             int e = event.getActionMasked();
             if (MotionEvent.ACTION_DOWN == e) {
+                System.out.println("test");
                 startX = event.getX();
                 startY = event.getY();
                 return true;
             } else if (MotionEvent.ACTION_UP == e) {
+                System.out.println("test2");
                 DrawableShape shape = new LineShape(startX, startY, event.getX(), event.getY());
                 Place place = new Place(startX, startY, event.getX(), event.getY());
                 container.add(shape, place);
