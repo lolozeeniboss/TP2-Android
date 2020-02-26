@@ -3,10 +3,14 @@ package fr.dut.tp2.andrawid;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Rect;
+import android.graphics.Path;
 
-public class RectangleShape implements DrawableShape {
+public class CursiveShape implements DrawableShape {
+    private final Path path;
 
+    public CursiveShape(Path path) {
+        this.path = path;
+    }
 
     @Override
     public void drawShape(float startX, float startY, float stopX, float stopY, Canvas canvas) {
@@ -14,7 +18,6 @@ public class RectangleShape implements DrawableShape {
         paint.setStrokeWidth(5);
         paint.setColor(Color.rgb(112, 14, 27));
         paint.setStyle(Paint.Style.STROKE);
-        Rect r = new Rect(((int)startX), ((int) startY), ((int) stopX), ((int) stopY));
-        canvas.drawRect(r, paint);
+        canvas.drawPath(path, paint);
     }
 }

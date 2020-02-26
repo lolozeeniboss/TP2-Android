@@ -1,6 +1,7 @@
 package fr.dut.tp2.andrawid;
 
 import android.annotation.SuppressLint;
+import android.graphics.Path;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -14,6 +15,8 @@ public class MainActivity extends AppCompatActivity {
     private ShapeKind selectedShapeKind;
     private float startX;
     private float startY;
+    private Path cursivePath;
+    private boolean flag = true;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -26,19 +29,31 @@ public class MainActivity extends AppCompatActivity {
         view.setOnTouchListener((v, event) -> {
             int e = event.getActionMasked();
             if (MotionEvent.ACTION_DOWN == e) {
-                //System.out.println("test");
+                cursivePath =  new Path();
                 startX = event.getX();
                 startY = event.getY();
                 return true;
             } else if (MotionEvent.ACTION_UP == e) {
-                //System.out.println("test2");
-                DrawableShape shape = new RectangleShape();
+                flag = true;
+                DrawableShape shape = new CursiveShape(cursivePath);
+                //cursivePath.close();
                 Place place = new Place(startX, startY, event.getX(), event.getY());
                 System.out.println("startX: " + startX);
                 System.out.println("startY: " + startY);
                 System.out.println("stopX: " + event.getX());
                 System.out.println("stopY: " + event.getX());
                 container.add(shape, place);
+                return true;
+            } else if (MotionEvent.ACTION_MOVE == e) {
+                //if du selecteur de formes pour executer le code qui suit que pour la forme cursive
+                if (flag) {
+                    cursivePath.moveTo(event.getX(), event.getY());
+                    flag = false;
+                } else {
+                    cursivePath.lineTo(event.getX(), event.getY());
+                }
+
+
                 return true;
             }
             return false;
