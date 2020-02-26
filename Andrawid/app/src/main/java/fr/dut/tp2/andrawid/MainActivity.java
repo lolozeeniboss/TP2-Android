@@ -12,7 +12,6 @@ import fr.dut.tp2.andrawid.export.test;
 
 public class MainActivity extends AppCompatActivity {
     private ShapeKind selectedShapeKind;
-    private View.OnTouchListener listener;
     private float startX;
     private float startY;
 
@@ -27,14 +26,18 @@ public class MainActivity extends AppCompatActivity {
         view.setOnTouchListener((v, event) -> {
             int e = event.getActionMasked();
             if (MotionEvent.ACTION_DOWN == e) {
-                System.out.println("test");
+                //System.out.println("test");
                 startX = event.getX();
                 startY = event.getY();
                 return true;
             } else if (MotionEvent.ACTION_UP == e) {
-                System.out.println("test2");
-                DrawableShape shape = new LineShape(startX, startY, event.getX(), event.getY());
+                //System.out.println("test2");
+                DrawableShape shape = new RectangleShape();
                 Place place = new Place(startX, startY, event.getX(), event.getY());
+                System.out.println("startX: " + startX);
+                System.out.println("startY: " + startY);
+                System.out.println("stopX: " + event.getX());
+                System.out.println("stopY: " + event.getX());
                 container.add(shape, place);
                 return true;
             }
