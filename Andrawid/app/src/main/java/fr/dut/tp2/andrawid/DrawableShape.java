@@ -4,4 +4,5 @@ import android.graphics.Canvas;
 
 public interface DrawableShape {
     public void drawShape(float startX, float startY, float stopX, float stopY, Canvas canvas);
+    public ShapeKind getType();
 }

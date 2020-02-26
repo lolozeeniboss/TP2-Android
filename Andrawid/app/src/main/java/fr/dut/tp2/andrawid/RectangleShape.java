@@ -17,4 +17,9 @@ public class RectangleShape implements DrawableShape {
         Rect r = new Rect(((int)startX), ((int) startY), ((int) stopX), ((int) stopY));
         canvas.drawRect(r, paint);
     }
+
+    @Override
+    public ShapeKind getType() {
+        return ShapeKind.RECTANGLE;
+    }
 }

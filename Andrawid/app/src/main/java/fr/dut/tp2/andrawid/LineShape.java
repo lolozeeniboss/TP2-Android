@@ -17,4 +17,9 @@ public class LineShape implements DrawableShape {
         System.out.println("stopY: " + (stopY));
         canvas.drawLine(startX, startY, stopX, stopY, paint);
     }
+
+    @Override
+    public ShapeKind getType() {
+        return ShapeKind.SEGMENT;
+    }
 }
