@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     private float startY;
     private Path cursivePath;
     private boolean flag = true;
+    private ShapeContainer container;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -24,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ShapeDisplayer view = findViewById(R.id.ShapeDisplayer);
-        ShapeContainer container = new ShapeContainer();
+        container = new ShapeContainer();
         view.setModel(container);
         view.setOnTouchListener((v, event) -> {
             int e = event.getActionMasked();
@@ -58,8 +59,12 @@ public class MainActivity extends AppCompatActivity {
             }
             return false;
         });
-        test.export();
+
     }
 
+
+    public void onSaveButtonClicked(View v) {
+        test.export(container);
+    }
 
 }
