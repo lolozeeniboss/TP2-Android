@@ -12,6 +12,11 @@ public class CursiveShape implements DrawableShape {
         this.path = path;
     }
 
+    public CursiveShape(float[] coords) {
+        //WIP
+        path = new Path();
+    }
+
     @Override
     public void drawShape(float startX, float startY, float stopX, float stopY, Canvas canvas) {
         Paint paint = new Paint();
@@ -19,5 +24,10 @@ public class CursiveShape implements DrawableShape {
         paint.setColor(Color.rgb(112, 14, 27));
         paint.setStyle(Paint.Style.STROKE);
         canvas.drawPath(path, paint);
+    }
+
+    @Override
+    public ShapeKind getType() {
+        return ShapeKind.CURSIVE;
     }
 }
