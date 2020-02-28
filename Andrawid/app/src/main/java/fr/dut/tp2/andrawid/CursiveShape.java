@@ -3,7 +3,8 @@ package fr.dut.tp2.andrawid;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Path;
+import fr.dut.tp2.andrawid.path.Path;
+import fr.dut.tp2.andrawid.path.Point;
 
 public class CursiveShape implements DrawableShape {
     private final Path path;
@@ -13,8 +14,7 @@ public class CursiveShape implements DrawableShape {
     }
 
     public CursiveShape(float[] coords) {
-        //WIP
-        path = new Path();
+        path = Path.fromCoords(coords);
     }
 
     @Override
@@ -23,7 +23,9 @@ public class CursiveShape implements DrawableShape {
         paint.setStrokeWidth(5);
         paint.setColor(Color.rgb(112, 14, 27));
         paint.setStyle(Paint.Style.STROKE);
-        canvas.drawPath(path, paint);
+        Point[] p = path.getArray().toArray(new Point[0]);
+        for (int i = 1; i < p.length; i++)
+            canvas.drawLine(p[i - 1].getX(), p[i - 1].getY(), p[i].getX(), p[i].getY(), paint);
     }
 
     @Override
