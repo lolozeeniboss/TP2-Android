@@ -15,6 +15,8 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.util.Map;
 
@@ -23,6 +25,15 @@ public class ExportJson implements DrawingIO {
 
     @Override
     public void save(ShapeContainer container, OutputStream output) {
+        ObjectOutputStream oos = null;
+        try {
+            oos = new ObjectOutputStream(output);
+            oos.writeObject(container) ;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+/*
         JSONObject object = new JSONObject();
         try {
             object.put("type","drawing");
@@ -50,7 +61,7 @@ public class ExportJson implements DrawingIO {
                     array3.put();
                     j.put("intermediatePoints",curse.getPath().approximate());
                 }
-*/
+
 
 
 
@@ -66,11 +77,20 @@ public class ExportJson implements DrawingIO {
 
 
         System.out.println(object);
-        Log.println(Log.DEBUG,"",object.toString());
+        Log.println(Log.DEBUG,"",object.toString());*/
     }
 
     @Override
     public ShapeContainer load(InputStream input) {
-        return null;
+        ObjectInputStream ois = null;
+        ShapeContainer container = null;
+        try {
+            ois = new ObjectInputStream(input);
+            container = (ShapeContainer)ois.readObject() ;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return container;
     }
 }
