@@ -18,8 +18,6 @@ public class DrawingBitmapExporter implements DrawingIO{
     public void save(ShapeContainer container, OutputStream output) {
         int offsetx = 0;
         int offsety = 0;
-        Display display = getWindowMa
-        Bitmap img = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
     }
 
     @Override
@@ -32,18 +30,4 @@ public class DrawingBitmapExporter implements DrawingIO{
         return null;
     }
 
-    public int getMinX(ShapeContainer container){
-        if(container.getMap().keySet().size()==0){
-            return 0;
-        }
-        ArrayList<Place> listShape = new ArrayList<>( container.getMap().values());
-        int minX = listShape.get(0).;
-           for(Place place : listShape){
-
-
-
-
-           }
-        return 0;
-    }
 }
