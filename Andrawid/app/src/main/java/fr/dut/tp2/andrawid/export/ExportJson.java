@@ -20,6 +20,7 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
+import java.util.HashMap;
 import java.util.Map;
 
 public class ExportJson implements DrawingIO {
@@ -27,13 +28,6 @@ public class ExportJson implements DrawingIO {
 
     @Override
     public void save(ShapeContainer container, OutputStream output) {
-       /* ObjectOutputStream oos = null;
-        try {
-            oos = new ObjectOutputStream(output);
-            oos.writeObject(container) ;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
 
 
         JSONObject object = new JSONObject();
@@ -84,15 +78,10 @@ public class ExportJson implements DrawingIO {
 
     @Override
     public ShapeContainer load(InputStream input) {
-        ObjectInputStream ois = null;
-        ShapeContainer container = null;
-        try {
-            ois = new ObjectInputStream(input);
-            container = (ShapeContainer)ois.readObject() ;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Map<DrawableShape,Place> map = new HashMap<>();
+        
 
-        return container;
+
+        return null;
     }
 }
