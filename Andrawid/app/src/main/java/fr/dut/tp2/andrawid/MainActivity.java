@@ -2,6 +2,8 @@ package fr.dut.tp2.andrawid;
 
 import android.annotation.SuppressLint;
 import android.graphics.Path;
+import android.graphics.drawable.shapes.Shape;
+import android.util.Pair;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -12,7 +14,6 @@ import android.os.Bundle;
 import fr.dut.tp2.andrawid.export.test;
 
 public class MainActivity extends AppCompatActivity {
-    private ShapeKind selectedShapeKind;
     private float startX;
     private float startY;
     private Path cursivePath;
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         ShapeDisplayer view = findViewById(R.id.ShapeDisplayer);
         container = new ShapeContainer();
         view.setModel(container);
+        //OnTouchListener
         view.setOnTouchListener((v, event) -> {
             int e = event.getActionMasked();
             if (MotionEvent.ACTION_DOWN == e) {
@@ -36,14 +38,20 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             } else if (MotionEvent.ACTION_UP == e) {
                 flag = true;
-                DrawableShape shape = new CursiveShape(cursivePath);
+                float[] coords = new float[4];
+                coords[0] = startX;coords[1] = startY;coords[2] = event.getX();coords[3] = event.getY();
+                ShapeBuilder shapeBuilder = new ShapeBuilder();
+                Pair<DrawableShape, Place> res = shapeBuilder.build(coords, cursivePath);
+
+                //DrawableShape shape = new CursiveShape(cursivePath);
                 //cursivePath.close();
-                Place place = new Place(startX, startY, event.getX(), event.getY());
-                System.out.println("startX: " + startX);
+                //Place place = new Place(startX, startY, event.getX(), event.getY());
+
+                /*System.out.println("startX: " + startX);
                 System.out.println("startY: " + startY);
                 System.out.println("stopX: " + event.getX());
-                System.out.println("stopY: " + event.getX());
-                container.add(new RectangleShape(), place);
+                System.out.println("stopY: " + event.getX());*/
+                container.add(res.first, res.second);
                 return true;
             } else if (MotionEvent.ACTION_MOVE == e) {
                 //if du selecteur de formes pour executer le code qui suit que pour la forme cursive
@@ -53,13 +61,10 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     cursivePath.lineTo(event.getX(), event.getY());
                 }
-
-
                 return true;
             }
             return false;
         });
-
     }
 
 
