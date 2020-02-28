@@ -2,8 +2,6 @@ package fr.dut.tp2.andrawid;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Path;
-import android.graphics.drawable.shapes.Shape;
 import android.os.Bundle;
 import android.util.Pair;
 import android.view.LayoutInflater;
@@ -11,14 +9,11 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.Bundle;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import fr.dut.tp2.andrawid.export.test;
 import fr.dut.tp2.andrawid.path.Path;
@@ -78,13 +73,11 @@ public class MainActivity extends AppCompatActivity {
             } else if (MotionEvent.ACTION_UP == e) {
                 flag = true;
                 float[] coords = new float[4];
-                ShapeBuilder shapeBuilder = new ShapeBuilder();
                 coords[0] = startX;
                 coords[1] = startY;
-                coords[coords.length - 1] = event.getX();
-                coords[coords.length - 2] = event.getY();
+                coords[2] = event.getX();
+                coords[3] = event.getY();
                 Pair<DrawableShape, Place> res = shapeBuilder.build(coords, cursivePath);
-                System.out.println(cursivePath);
 
                 //DrawableShape shape = new CursiveShape(cursivePath);
                 //cursivePath.close();
@@ -93,18 +86,23 @@ public class MainActivity extends AppCompatActivity {
                 /*System.out.println("startX: " + startX);
                 System.out.println("startY: " + startY);
                 System.out.println("stopX: " + event.getX());
-                System.out.println("stopY: " + event.getX());*/
+                System.out.println("stopY: " + event.getY());*/
+                for (int i=0;i<coords.length;i++) {
+                    System.out.println("coords["+i+"] : " + coords[i]);
+                }
+
+                System.out.println(res.first);
                 container.add(res.first, res.second);
                 return true;
             } else if (MotionEvent.ACTION_MOVE == e) {
                 //if du selecteur de formes pour executer le code qui suit que pour la forme cursive
                 if (flag) {
                     cursivePath.moveTo(new Point(event.getX(), event.getY()));
-                    System.out.println("start =" + new Point(event.getX(), event.getY()));
+                    //System.out.println("start =" + new Point(event.getX(), event.getY()));
                     flag = false;
                 } else {
                     cursivePath.lineTo(new Point(event.getX(), event.getY()));
-                    System.out.println("new =" + new Point(event.getX(), event.getY()));
+                    //System.out.println("new =" + new Point(event.getX(), event.getY()));
                 }
                 return true;
             }

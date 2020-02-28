@@ -2,10 +2,11 @@ package fr.dut.tp2.andrawid;
 
 
 import android.util.Pair;
+
 import fr.dut.tp2.andrawid.path.Path;
 
 public class ShapeBuilder {
-    private ShapeKind shapeKind = ShapeKind.CURSIVE;
+    private ShapeKind shapeKind = ShapeKind.SEGMENT;
 
     /**
      * to set the current kind of shape to create
