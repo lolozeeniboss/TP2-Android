@@ -3,8 +3,8 @@ package fr.dut.tp2.andrawid;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import fr.dut.tp2.andrawid.newPath.Path;
-import fr.dut.tp2.andrawid.newPath.Point;
+import fr.dut.tp2.andrawid.path.Path;
+import fr.dut.tp2.andrawid.path.Point;
 
 public class CursiveShape implements DrawableShape {
     private final Path path;

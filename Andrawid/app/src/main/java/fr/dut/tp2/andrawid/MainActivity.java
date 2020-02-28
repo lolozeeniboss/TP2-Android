@@ -7,8 +7,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import fr.dut.tp2.andrawid.export.test;
-import fr.dut.tp2.andrawid.newPath.Path;
-import fr.dut.tp2.andrawid.newPath.Point;
+import fr.dut.tp2.andrawid.path.Path;
+import fr.dut.tp2.andrawid.path.Point;
 
 public class MainActivity extends AppCompatActivity {
     private float startX;

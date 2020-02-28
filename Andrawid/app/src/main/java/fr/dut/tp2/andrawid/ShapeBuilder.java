@@ -2,7 +2,7 @@ package fr.dut.tp2.andrawid;
 
 
 import android.util.Pair;
-import fr.dut.tp2.andrawid.newPath.Path;
+import fr.dut.tp2.andrawid.path.Path;
 
 public class ShapeBuilder {
     private ShapeKind shapeKind = ShapeKind.CURSIVE;
