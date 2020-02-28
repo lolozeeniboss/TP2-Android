@@ -53,16 +53,15 @@ public class ExportJson implements DrawingIO {
                 j.put("place",array2);
 
 
-                /*
+
                 if(entry.getKey().getType().equals(ShapeKind.CURSIVE)){
                     CursiveShape curse = (CursiveShape)entry.getKey();
                     JSONArray array3 = new JSONArray();
-                    for(float f : curse.getPath().approximate()){
-
+                    for(float f : curse.getPath().getFArray()){
+                        array3.put(f);
                     }
-                    array3.put();
-                    j.put("intermediatePoints",curse.getPath().approximate());
-                }*/
+                    j.put("intermediatePoints",array3);
+                }
 
                 arrayJson.put(j);
             }

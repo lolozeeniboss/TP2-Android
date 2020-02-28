@@ -32,4 +32,8 @@ public class CursiveShape implements DrawableShape {
     public ShapeKind getType() {
         return ShapeKind.CURSIVE;
     }
+
+    public Path getPath(){
+        return path;
+    }
 }
