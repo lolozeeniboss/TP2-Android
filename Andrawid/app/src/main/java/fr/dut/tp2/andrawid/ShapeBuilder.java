@@ -1,5 +1,6 @@
 package fr.dut.tp2.andrawid;
 
+import android.graphics.Path;
 import android.util.Pair;
 
 public class ShapeBuilder {
@@ -19,7 +20,7 @@ public class ShapeBuilder {
      * coords[coords.length-2] and coords[coords.length-1] are the x and y of the end of the shape
      * some shape kinds (like CURSIVE) may admit intermediate points in the array
      */
-    public Pair<DrawableShape, Place> build(float[] coords) {
+    public Pair<DrawableShape, Place> build(float[] coords, Path path) {
         float startX, startY, stopX, stopY;
         startX = coords[0];
         startY = coords[1];
@@ -28,7 +29,7 @@ public class ShapeBuilder {
         Place place = new Place(startX, startY, stopX, stopY);
         DrawableShape shape;
         if (shapeKind == ShapeKind.CURSIVE) {
-            shape = new CursiveShape(coords);
+            shape = new CursiveShape(path);
         } else if (shapeKind == ShapeKind.RECTANGLE) {
             shape = new RectangleShape();
         } else {
