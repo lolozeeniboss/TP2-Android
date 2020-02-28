@@ -1,5 +1,6 @@
 package fr.dut.tp2.andrawid.export;
 
+import android.content.Context;
 import android.util.JsonReader;
 import android.util.Log;
 
@@ -13,8 +14,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.util.Map;
 
@@ -23,6 +27,15 @@ public class ExportJson implements DrawingIO {
 
     @Override
     public void save(ShapeContainer container, OutputStream output) {
+       /* ObjectOutputStream oos = null;
+        try {
+            oos = new ObjectOutputStream(output);
+            oos.writeObject(container) ;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
+
+
         JSONObject object = new JSONObject();
         try {
             object.put("type","drawing");
@@ -40,27 +53,27 @@ public class ExportJson implements DrawingIO {
                 j.put("place",array2);
 
 
-                /*
+
                 if(entry.getKey().getType().equals(ShapeKind.CURSIVE)){
                     CursiveShape curse = (CursiveShape)entry.getKey();
                     JSONArray array3 = new JSONArray();
-                    for(float f : curse.getPath().approximate()){
-
+                    for(float f : curse.getPath().getFArray()){
+                        array3.put(f);
                     }
-                    array3.put();
-                    j.put("intermediatePoints",curse.getPath().approximate());
+                    j.put("intermediatePoints",array3);
                 }
-*/
-
-
-
-
-
 
                 arrayJson.put(j);
             }
             object.put("objects",arrayJson);
-    } catch (JSONException e) {
+
+
+
+
+
+            output.write(object.toString().getBytes());
+            System.out.println(output.toString());
+    } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -71,6 +84,15 @@ public class ExportJson implements DrawingIO {
 
     @Override
     public ShapeContainer load(InputStream input) {
-        return null;
+        ObjectInputStream ois = null;
+        ShapeContainer container = null;
+        try {
+            ois = new ObjectInputStream(input);
+            container = (ShapeContainer)ois.readObject() ;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return container;
     }
 }

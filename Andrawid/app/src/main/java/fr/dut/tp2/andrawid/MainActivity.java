@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Path;
 import android.graphics.drawable.shapes.Shape;
+import android.os.Bundle;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -20,6 +21,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import fr.dut.tp2.andrawid.export.test;
+import fr.dut.tp2.andrawid.path.Path;
+import fr.dut.tp2.andrawid.path.Point;
 
 public class MainActivity extends AppCompatActivity {
     private ShapeKind selectedShapeKind;
@@ -29,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private Path cursivePath;
     private boolean flag = true;
     private ShapeContainer container;
+    private ShapeKind selectedShapekind = null;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -74,8 +78,13 @@ public class MainActivity extends AppCompatActivity {
             } else if (MotionEvent.ACTION_UP == e) {
                 flag = true;
                 float[] coords = new float[4];
-                coords[0] = startX;coords[1] = startY;coords[2] = event.getX();coords[3] = event.getY();
+                ShapeBuilder shapeBuilder = new ShapeBuilder();
+                coords[0] = startX;
+                coords[1] = startY;
+                coords[coords.length - 1] = event.getX();
+                coords[coords.length - 2] = event.getY();
                 Pair<DrawableShape, Place> res = shapeBuilder.build(coords, cursivePath);
+                System.out.println(cursivePath);
 
                 //DrawableShape shape = new CursiveShape(cursivePath);
                 //cursivePath.close();
@@ -90,10 +99,12 @@ public class MainActivity extends AppCompatActivity {
             } else if (MotionEvent.ACTION_MOVE == e) {
                 //if du selecteur de formes pour executer le code qui suit que pour la forme cursive
                 if (flag) {
-                    cursivePath.moveTo(event.getX(), event.getY());
+                    cursivePath.moveTo(new Point(event.getX(), event.getY()));
+                    System.out.println("start =" + new Point(event.getX(), event.getY()));
                     flag = false;
                 } else {
-                    cursivePath.lineTo(event.getX(), event.getY());
+                    cursivePath.lineTo(new Point(event.getX(), event.getY()));
+                    System.out.println("new =" + new Point(event.getX(), event.getY()));
                 }
                 return true;
             }
