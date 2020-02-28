@@ -1,6 +1,8 @@
 package fr.dut.tp2.andrawid.export;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.view.Display;
 
 import java.io.FileOutputStream;
@@ -10,14 +12,22 @@ import java.util.ArrayList;
 
 import fr.dut.tp2.andrawid.DrawableShape;
 import fr.dut.tp2.andrawid.Place;
+import fr.dut.tp2.andrawid.R;
 import fr.dut.tp2.andrawid.ShapeContainer;
+import fr.dut.tp2.andrawid.ShapeDisplayer;
 
 public class DrawingBitmapExporter implements DrawingIO{
 
+    public static Bitmap img;
+
     @Override
     public void save(ShapeContainer container, OutputStream output) {
-        int offsetx = 0;
-        int offsety = 0;
+
+        img.compress(Bitmap.CompressFormat.JPEG,100,output);
+
+
+
+
     }
 
     @Override

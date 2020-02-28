@@ -1,5 +1,6 @@
 package fr.dut.tp2.andrawid.export;
 
+import android.content.Context;
 import android.util.JsonReader;
 import android.util.Log;
 
@@ -13,6 +14,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
@@ -25,15 +27,15 @@ public class ExportJson implements DrawingIO {
 
     @Override
     public void save(ShapeContainer container, OutputStream output) {
-        ObjectOutputStream oos = null;
+       /* ObjectOutputStream oos = null;
         try {
             oos = new ObjectOutputStream(output);
             oos.writeObject(container) ;
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
 
-/*
+
         JSONObject object = new JSONObject();
         try {
             object.put("type","drawing");
@@ -60,24 +62,25 @@ public class ExportJson implements DrawingIO {
                     }
                     array3.put();
                     j.put("intermediatePoints",curse.getPath().approximate());
-                }
-
-
-
-
-
-
+                }*/
 
                 arrayJson.put(j);
             }
             object.put("objects",arrayJson);
-    } catch (JSONException e) {
+
+
+
+
+
+            output.write(object.toString().getBytes());
+            System.out.println(output.toString());
+    } catch (Exception e) {
             e.printStackTrace();
         }
 
 
         System.out.println(object);
-        Log.println(Log.DEBUG,"",object.toString());*/
+        Log.println(Log.DEBUG,"",object.toString());
     }
 
     @Override
