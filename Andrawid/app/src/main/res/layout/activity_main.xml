@@ -20,6 +20,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="82dp"
+        android:layout_marginTop="64dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toStartOf="@+id/ShapeDisplayer"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,5 +33,18 @@
             android:layout_weight="1"
             android:onClick="onSaveButtonClicked"
             android:text="Save" />
+
     </LinearLayout>
+
+    <GridView
+        android:id="@+id/shapePalette2"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_weight="1"
+        android:choiceMode="singleChoice"
+        android:gravity="center|center_horizontal|center_vertical"
+        android:numColumns="3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

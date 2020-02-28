@@ -1,19 +1,29 @@
 package fr.dut.tp2.andrawid;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.graphics.Path;
 import android.graphics.drawable.shapes.Shape;
 import android.util.Pair;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import fr.dut.tp2.andrawid.export.test;
 
 public class MainActivity extends AppCompatActivity {
+    private ShapeKind selectedShapeKind;
+    private final ShapeBuilder shapeBuilder = new ShapeBuilder();
     private float startX;
     private float startY;
     private Path cursivePath;
@@ -28,6 +38,31 @@ public class MainActivity extends AppCompatActivity {
         ShapeDisplayer view = findViewById(R.id.ShapeDisplayer);
         container = new ShapeContainer();
         view.setModel(container);
+
+        GridView gv = (GridView) findViewById(R.id.shapePalette2);
+        ArrayAdapter<ShapeKind> arrayAdapter = new ArrayAdapter<ShapeKind>(this, android.R.layout.simple_list_item_1, ShapeKind.values()) {
+            public View getView(int position, android.view.View recycledView, ViewGroup parent)
+            {
+                android.view.View v = recycledView;
+                LayoutInflater inflater = (LayoutInflater) getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                if (v == null) {
+                    v = inflater.inflate(R.layout.item_view, null);
+                }
+                TextView textView = (TextView) v.findViewById(R.id.labelView);
+                ImageView imageView = (ImageView) v.findViewById(R.id.imgView);
+                imageView.setColorFilter(17170444);
+                ShapeKind usedShapedKind = ShapeKind.values()[position];
+                textView.setText(usedShapedKind.toString());
+                imageView.setImageResource(usedShapedKind.getImage());
+                return v;
+            }
+        };
+        gv.setAdapter(arrayAdapter);
+        gv.setOnItemClickListener( (adapterView, normalView, i, l) -> {
+            selectedShapeKind = (ShapeKind) adapterView.getItemAtPosition(i);
+            shapeBuilder.setShapeKind(selectedShapeKind);
+        });
+
         //OnTouchListener
         view.setOnTouchListener((v, event) -> {
             int e = event.getActionMasked();
@@ -40,7 +75,6 @@ public class MainActivity extends AppCompatActivity {
                 flag = true;
                 float[] coords = new float[4];
                 coords[0] = startX;coords[1] = startY;coords[2] = event.getX();coords[3] = event.getY();
-                ShapeBuilder shapeBuilder = new ShapeBuilder();
                 Pair<DrawableShape, Place> res = shapeBuilder.build(coords, cursivePath);
 
                 //DrawableShape shape = new CursiveShape(cursivePath);

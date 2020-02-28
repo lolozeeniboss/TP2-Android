@@ -12,7 +12,7 @@ public class RectangleShape implements DrawableShape {
     public void drawShape(float startX, float startY, float stopX, float stopY, Canvas canvas) {
         Paint paint = new Paint();
         paint.setStrokeWidth(5);
-        paint.setColor(Color.rgb(112, 14, 27));
+        paint.setColor(Color.rgb(0, 0, 128));
         paint.setStyle(Paint.Style.STROKE);
         Rect r = new Rect(((int)startX), ((int) startY), ((int) stopX), ((int) stopY));
         canvas.drawRect(r, paint);
