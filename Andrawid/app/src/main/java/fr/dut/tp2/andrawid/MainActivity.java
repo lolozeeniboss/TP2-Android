@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println("startY: " + startY);
                 System.out.println("stopX: " + event.getX());
                 System.out.println("stopY: " + event.getX());
-                container.add(shape, place);
+                container.add(new RectangleShape(), place);
                 return true;
             } else if (MotionEvent.ACTION_MOVE == e) {
                 //if du selecteur de formes pour executer le code qui suit que pour la forme cursive

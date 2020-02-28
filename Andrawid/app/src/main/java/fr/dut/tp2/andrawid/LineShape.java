@@ -11,10 +11,6 @@ public class LineShape implements DrawableShape {
         Paint paint = new Paint();
         paint.setStrokeWidth(10);
         paint.setColor(Color.rgb(255, 192, 203));
-        System.out.println("startX: " + startX);
-        System.out.println("startY: " + startY);
-        System.out.println("stopX: " + (stopX));
-        System.out.println("stopY: " + (stopY));
         canvas.drawLine(startX, startY, stopX, stopY, paint);
     }
 
